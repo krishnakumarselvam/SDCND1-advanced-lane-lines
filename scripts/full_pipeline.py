@@ -48,14 +48,6 @@ class LaneEquation:
         self.coeff = coeff
         self.cov = cov
 
-    def get_curvature(self, y_eval):
-        # Define conversions in x and y from pixels space to meters
-        ym_per_pix = 30/720 # meters per pixel in y dimension
-        xm_per_pix = 3.7/700 # meters per pixel in x dimension
-        fit_cr = self.coeff
-        curverad = ((1 + (2*fit_cr[0]*y_eval*ym_per_pix + fit_cr[1])**2)**1.5) / np.absolute(2*fit_cr[0])
-        return curverad
-
 def fit_data(x, y, deg=1):
     fit = np.polyfit(x,y,deg, cov=True)
     return LaneEquation(fit[0], fit[1])
@@ -154,8 +146,13 @@ class ProcessFrame():
         rightx = nonzerox[right_lane_inds]
         righty = nonzeroy[right_lane_inds] 
 
+
+        ym_per_pix = 30/720 # meters per pixel in y dimension
+        xm_per_pix = 3.7/700 # meters per pixel in x dimension
+
         left_fit = fit_data(lefty, leftx, deg=2)
         right_fit = fit_data(righty, rightx, deg=2)
+
         ploty = np.linspace(0, binary_warped.shape[0]-1, binary_warped.shape[0])
         max_plot_y = max(ploty)
 
@@ -163,13 +160,23 @@ class ProcessFrame():
         if len(self.smooth_equations.left_eqns) > 1:
             left_fit, right_fit = self.smooth_equations.get_combined_eqns()
         
-        curvature = 0.5 * (left_fit.get_curvature(max_plot_y) + right_fit.get_curvature(max_plot_y))
-        lane_center = (np.polyval(left_fit.coeff, max_plot_y) + np.polyval(right_fit.coeff, max_plot_y))/2
-        image_center = binary_warped.shape[1]/2
-        xm_per_pix = 3.7/700
-        offset_m = xm_per_pix * (image_center - lane_center)
         left_fitx = np.polyval(left_fit.coeff, ploty)
         right_fitx = np.polyval(right_fit.coeff, ploty)
+
+        y_eval = max(ploty)
+
+        # Fit new polynomials to x,y in world space
+        left_fit_cr = np.polyfit(ploty*ym_per_pix, left_fitx*xm_per_pix, 2)
+        right_fit_cr = np.polyfit(ploty*ym_per_pix, right_fitx*xm_per_pix, 2)
+        # Calculate the new radii of curvature
+        left_curverad = ((1 + (2*left_fit_cr[0]*y_eval*ym_per_pix + left_fit_cr[1])**2)**1.5) / np.absolute(2*left_fit_cr[0])
+        right_curverad = ((1 + (2*right_fit_cr[0]*y_eval*ym_per_pix + right_fit_cr[1])**2)**1.5) / np.absolute(2*right_fit_cr[0])
+
+        curvature = (left_curverad + right_curverad)/2
+
+        lane_center = (np.polyval(left_fit.coeff, max_plot_y) + np.polyval(right_fit.coeff, max_plot_y))/2
+        image_center = binary_warped.shape[1]/2
+        offset_m = xm_per_pix * (image_center - lane_center)
 
         return left_fitx, right_fitx, curvature, offset_m
 

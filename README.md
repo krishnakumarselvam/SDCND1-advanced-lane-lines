@@ -3,17 +3,11 @@
 
 ---
 
-The goals / steps of this project are the following:
-
-* Compute the camera calibration matrix and distortion coefficients given a set of chessboard images.
-* Apply a distortion correction to raw images.
-* Use color transforms, gradients, etc., to create a thresholded binary image.
-* Apply a perspective transform to rectify binary image ("birds-eye view").
-* Detect lane pixels and fit to find the lane boundary.
-* Determine the curvature of the lane and vehicle position with respect to center.
-* Warp the detected lane boundaries back onto the original image.
-* Output visual display of the lane boundaries and numerical estimation of lane curvature and vehicle position.
+The goal of this project is to detect 
+* the boundaries of the lane which the vehicle is in
+* the radius of curvature of the lane
+* the position of the vehicle with respect to the center of the lane
 
 ---
-* [output video](https://youtu.be/Ez3moQHSND4)
-* [write up](writeup_template.md) (includes links to code)
+* [Output video](https://youtu.be/c1HQr1HwNGo)
+* [Write up](writeup_template.md) (includes links to code)

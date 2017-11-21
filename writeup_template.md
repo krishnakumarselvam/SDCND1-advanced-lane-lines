@@ -110,7 +110,7 @@ I wrote up classes for each of the operations in Steps 1 - 4, so that they could
 
 #### 1. Provide a link to your final video output.  
 
-Here's a [youtube link to my video result](https://youtu.be/c1HQr1HwNGo). I have also uploaded the [viedo file](advanced_lane_lines_final.mp4) in this repository 
+Here's a [youtube link to my video result](https://youtu.be/c1HQr1HwNGo). I have also uploaded the [video file](advanced_lane_lines_final.mp4) in this repository 
 
 [full_pipeline.py](scripts/full_pipeline.py) has all the classes / methods I use to process the video. [(Notebook)](Step_5_smoothing.ipynb)
 

@@ -119,7 +119,8 @@ Here's a [youtube link to my video result](https://youtu.be/c1HQr1HwNGo).
 #### 1. Briefly discuss any problems / issues you faced in your implementation of this project.  Where will your pipeline likely fail?  What could you do to make it more robust?
 
 * The thresholding technique seems like it may / may not work in different light conditions. 
-* The smoothing across frames can also be better ( I had to choose the right number of frames to smooth over that worked well here, but it may not generalize)
+* The smoothing across frames can also be better ( I had to choose the right number of frames to smooth over that worked well here, but it may not generalize).
+* I hope to build a kalman filter when I have time, so that we can also encode structural information (like the two lanes are likely to be parallel) into the filter which will be useful when dealing with missing / noisy data.
 * Knowledge of the positions and trajectories of other vehicles can be useful to identify lane lines when they are faded out / etc. These can also reinforce the detections by our current pipeline
 * I'd love to try out some machine learning methods (neural nets etc.) to identify if a patch of image is a road, and if yes then if it's a lane line or not. 
 

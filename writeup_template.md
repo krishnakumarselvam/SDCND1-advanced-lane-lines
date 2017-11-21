@@ -108,8 +108,11 @@ I wrote up classes for each of the operations in Steps 1 - 4, so that they could
 
 ### Pipeline (video)
 
-#### 1. Provide a link to your final video output.  Your pipeline should perform reasonably well on the entire project video (wobbly lin
-Here's a [youtube link to my video result](https://youtu.be/c1HQr1HwNGo)
+#### 1. Provide a link to your final video output.  
+
+Here's a [youtube link to my video result](https://youtu.be/c1HQr1HwNGo). 
+
+[full_pipeline.py](scripts/full_pipeline.py) has all the classes / methods I use to process the video. [(Notebook)](Step_5_smoothing.ipynb)
 
 ### Discussion
 

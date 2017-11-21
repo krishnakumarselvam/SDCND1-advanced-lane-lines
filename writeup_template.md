@@ -45,19 +45,19 @@ I then used the `cv2.calibrateCamera()` to calculate the `ret, mtx, dist, rvecs,
 
 ### Pipeline (single images)
 
-#### 1. Provide an example of a distortion-corrected image.
+#### Provide an example of a distortion-corrected image.
 
 The calibrated coefficients were used to undstort images. For example, on a test image the results look as follows
 
 <img src="img/dist_correct.png" width="480" />
 
-[Here is the notebook](Step_1_calibrate_camera.ipynb) that I used for camera calibration. I defined functions / classes[here](scripts/calibrate_camera.py) and [here](scripts/distortion_correct.py) that are used in the pipeline. [This notebook](Step 2 - distortion correction.ipynb) has examples. 
+[Here is the notebook](Step_1_calibrate_camera.ipynb) that I used for camera calibration. I defined functions / classes[here](scripts/calibrate_camera.py) and [here](scripts/distortion_correct.py) that are used in the pipeline. [This notebook](Step_2_distortion_correction.ipynb) has examples. 
 
 #### 2. Describe how (and identify where in your code) you used color transforms, gradients or other methods to create a thresholded binary image.  Provide an example of a binary image result.
 
-I used a combination of color and gradient thresholds to generate a binary image (thresholding steps at lines # through # in `another_file.py`).  Here's an example of my output for this step.  (note: this is not actually from one of the test images)
+I defined the `ExtractLanes` class [here](scripts/thresholding.py) which uses sobel operators for thresholding along with color operators.
 
-![alt text][image3]
+<img src="img/thresholding.png" width="480" />
 
 #### 3. Describe how (and identify where in your code) you performed a perspective transform and provide an example of a transformed image.
 

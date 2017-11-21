@@ -72,21 +72,38 @@ dst = np.float32([[200, 700], [200, 0], [1000, 0], [1000, 700]])
 ```
 
 Original image, after distortion correction
-<img src="img/persp0.png" width="480" />
+
+<img src="img/persp0.png" width="240" />
 
 Binary image, after thresholding
-<img src="img/persp1.png" width="480" />
+
+<img src="img/persp1.png" width="240" />
 
 Top down view, after perspective transform
-<img src="img/persp2.png" width="480" />
 
----
-
----
-
----
+<img src="img/persp2.png" width="240" />
 
 #### 4. Describe how (and identify where in your code) you identified lane-line pixels and fit their positions with a polynomial?
+[(Notebook)](Step_4_perspective_transform.ipynb)
+
+After the perspective transform, I take a histogram of the lower half of the image
+
+<img src="img/hist.png" width="240" />
+
+I then do a sliding window search followed by a polynomial fit (2nd degree).
+
+<img src="img/fit.png" width="240" />
+
+I then warp the perspective back to the original, and get the following output. 
+
+<img src="img/example.png" width="240" />
+
+---
+
+---
+
+---
+
 
 Then I did some other stuff and fit my lane lines with a 2nd order polynomial kinda like this:
 

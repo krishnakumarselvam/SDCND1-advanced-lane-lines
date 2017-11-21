@@ -98,39 +98,32 @@ I then warp the perspective back to the original, and get the following output.
 
 <img src="img/example.png" width="240" />
 
----
-
----
-
----
-
-
-Then I did some other stuff and fit my lane lines with a 2nd order polynomial kinda like this:
-
-![alt text][image5]
-
-#### 5. Describe how (and identify where in your code) you calculated the radius of curvature of the lane and the position of the vehicle with respect to center.
-
-I did this in lines # through # in my code in `my_other_file.py`
-
 #### 6. Provide an example image of your result plotted back down onto the road such that the lane area is identified clearly.
+[(Notebook)](Step_5_smoothing.ipynb)
 
-I implemented this step in lines # through # in my code in `yet_another_file.py` in the function `map_lane()`.  Here is an example of my result on a test image:
+I wrote up classes for each of the operations in Steps 1 - 4, so that they could be used in the final pipeline. These are in the `scripts/*.py` files. I also added functions to calculate the curvature and the offset from the center based on the ideas described in the lesson.
 
-![alt text][image6]
+<img src="img/sample.png" width="240" />
 
----
 
 ### Pipeline (video)
 
-#### 1. Provide a link to your final video output.  Your pipeline should perform reasonably well on the entire project video (wobbly lines are ok but no catastrophic failures that would cause the car to drive off the road!).
-
-Here's a [link to my video result](./project_video.mp4)
-
----
+#### 1. Provide a link to your final video output.  Your pipeline should perform reasonably well on the entire project video (wobbly lin
+Here's a [youtube link to my video result](https://youtu.be/c1HQr1HwNGo)
 
 ### Discussion
 
 #### 1. Briefly discuss any problems / issues you faced in your implementation of this project.  Where will your pipeline likely fail?  What could you do to make it more robust?
 
-Here I'll talk about the approach I took, what techniques I used, what worked and why, where the pipeline might fail and how I might improve it if I were going to pursue this project further.  
+* The thresholding technique seems like it may / may not work in different light conditions. 
+* The smoothing across frames can also be better ( I had to choose the right number of frames to smooth over that worked well here, but it may not generalize)
+* Knowledge of the positions and trajectories of other vehicles can be useful to identify lane lines when they are faded out / etc. These can also reinforce the detections by our current pipeline
+* I'd love to try out some machine learning methods (neural nets etc.) to identify if a patch of image is a road, and if yes then if it's a lane line or not. 
+
+
+
+
+
+
+
+

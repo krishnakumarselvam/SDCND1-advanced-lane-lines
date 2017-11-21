@@ -40,8 +40,7 @@ You're reading it!
 The code for camera calibration is contained in [this notebook](Step 1 - calibrate camera .ipynb). I use the `cv2.findChessboardCorners` method to identify object points (coordinates in the real world) for different corners (`imgpoints`) in the picture.
 
 I then used the `cv2.calibrateCamera()` to calculate the `ret, mtx, dist, rvecs, tvecs` for the camera and stored it in pickle file.
-
-![alt text][image1]
+<img src="img/chessboard.png" width="240" alt="calibration" />
 
 ### Pipeline (single images)
 

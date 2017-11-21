@@ -41,7 +41,7 @@ The code for camera calibration is contained in [this notebook](Step 1 - calibra
 
 I then used the `cv2.calibrateCamera()` to calculate the `ret, mtx, dist, rvecs, tvecs` for the camera and stored it in pickle file.
 
-<img src="img/chessboard.png" width="240" height=240" "alt="calibration" />
+<img src="img/chessboard.png" width="240" height="240" alt="calibration" />
 
 ### Pipeline (single images)
 
@@ -51,7 +51,7 @@ The calibrated coefficients were used to undstort images. For example, on a test
 
 <img src="img/dist_correct.png" width="480" />
 
-[Here is the notebook](Step_1_calibrate_camera.ipynb) that I used for camera calibration.
+[Here is the notebook](Step_1_calibrate_camera.ipynb) that I used for camera calibration. I defined functions / classes[here](scripts/calibrate_camera.py) and [here](scripts/distortion_correct.py) that are used in the pipeline. [This notebook](Step 2 - distortion correction.ipynb) has examples. 
 
 #### 2. Describe how (and identify where in your code) you used color transforms, gradients or other methods to create a thresholded binary image.  Provide an example of a binary image result.
 

@@ -41,7 +41,7 @@ The code for camera calibration is contained in [this notebook](Step 1 - calibra
 
 I then used the `cv2.calibrateCamera()` to calculate the `ret, mtx, dist, rvecs, tvecs` for the camera and stored it in pickle file.
 
-<img src="img/chessboard.png" width="240" height="240" alt="calibration" />
+<img src="img/chessboard.png" width="240" height="180" alt="calibration" />
 
 ### Pipeline (single images)
 
@@ -54,40 +54,37 @@ The calibrated coefficients were used to undstort images. For example, on a test
 [Here is the notebook](Step_1_calibrate_camera.ipynb) that I used for camera calibration. I defined functions / classes[here](scripts/calibrate_camera.py) and [here](scripts/distortion_correct.py) that are used in the pipeline. [This notebook](Step_2_distortion_correction.ipynb) has examples. 
 
 #### 2. Describe how (and identify where in your code) you used color transforms, gradients or other methods to create a thresholded binary image.  Provide an example of a binary image result.
+[(Notebook)](Step_3_Thresholding.ipynb)
 
-I defined the `ExtractLanes` class [here](scripts/thresholding.py) which uses sobel operators for thresholding along with color operators.
+I defined the `ExtractLanes` class [here](scripts/thresholding.py) which uses sobel operators for thresholding along with color operators. 
 
 <img src="img/thresholding.png" width="480" />
 
+
 #### 3. Describe how (and identify where in your code) you performed a perspective transform and provide an example of a transformed image.
+[(Notebook)](Step_4_perspective_transform.ipynb)
 
-The code for my perspective transform includes a function called `warper()`, which appears in lines 1 through 8 in the file `example.py` (output_images/examples/example.py) (or, for example, in the 3rd code cell of the IPython notebook).  The `warper()` function takes as inputs an image (`img`), as well as source (`src`) and destination (`dst`) points.  I chose the hardcode the source and destination points in the following manner:
+I used the following coefficients for the perspective transform, using `cv2.getPerspectiveTransform`
 
-```python
-src = np.float32(
-    [[(img_size[0] / 2) - 55, img_size[1] / 2 + 100],
-    [((img_size[0] / 6) - 10), img_size[1]],
-    [(img_size[0] * 5 / 6) + 60, img_size[1]],
-    [(img_size[0] / 2 + 55), img_size[1] / 2 + 100]])
-dst = np.float32(
-    [[(img_size[0] / 4), 0],
-    [(img_size[0] / 4), img_size[1]],
-    [(img_size[0] * 3 / 4), img_size[1]],
-    [(img_size[0] * 3 / 4), 0]])
+```
+src = np.float32([[257, 719], [584, 464], [714, 464], [1162, 719]])
+dst = np.float32([[200, 700], [200, 0], [1000, 0], [1000, 700]])
 ```
 
-This resulted in the following source and destination points:
+Original image, after distortion correction
+<img src="img/persp0.png" width="480" />
 
-| Source        | Destination   |
-|:-------------:|:-------------:|
-| 585, 460      | 320, 0        |
-| 203, 720      | 320, 720      |
-| 1127, 720     | 960, 720      |
-| 695, 460      | 960, 0        |
+Binary image, after thresholding
+<img src="img/persp1.png" width="480" />
 
-I verified that my perspective transform was working as expected by drawing the `src` and `dst` points onto a test image and its warped counterpart to verify that the lines appear parallel in the warped image.
+Top down view, after perspective transform
+<img src="img/persp2.png" width="480" />
 
-![alt text][image4]
+---
+
+---
+
+---
 
 #### 4. Describe how (and identify where in your code) you identified lane-line pixels and fit their positions with a polynomial?
 
